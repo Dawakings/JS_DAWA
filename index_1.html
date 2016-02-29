@@ -5,74 +5,7 @@
         <meta charset="UTF-8" />
         <script src="http://code.jquery.com/jquery-latest.min.js"></script>        
 
-        <script>
-            function getAllavaror(data) {
-
-                //    alert(data[0].id);
-
-                var ul = document.getElementById("lista");
-                for (temp in data) {
-                    /*  alert(data[temp].id);
-                     alert(data[temp].namn); */
-
-                    var li = document.createElement("li")
-
-                    li.innerHTML += data[temp].id + " ";
-                    li.innerHTML += data[temp].namn + " ";
-                    li.innerHTML += data[temp].kategori + " ";
-                    li.innerHTML += data[temp].bildurl + " ";
-                    li.innerHTML += data[temp].infoshort + " ";
-                    li.innerHTML += data[temp].infolong + " ";
-
-                    ul.appendChild(li);
-
-                }
-            }
-
-            function getKategories(data) {
-
-                //    alert(data[0].id);
-
-                var ul = document.getElementById("nav");
-                for (temp in data) {
-
-
-
-
-                    var li = document.createElement("li")   
-
-
-                    li.innerHTML += data[temp].kategori + " ";
-
-
-                    ul.appendChild(li);
-
-                }
-            }
-          
-
-            $(document).ready(function () {
-
-                $.getJSON("index2.php/getAllavaror", getAllavaror);
-
-            });
-
-            $(document).ready(function () {
-
-                $.getJSON("index2.php/getKategories", getKategories);
-
-            });
-            
-             $(document).ready(function () {
-
-                $.getJSON("index2.php/getinfoByKategori/Datorer", getAllavaror);
-
-            });
-            
-          
-
-
-        </script>
+        <script src="presentation.js"> </script>
 
         <title>IK1005 Admin JQuery</title>
 

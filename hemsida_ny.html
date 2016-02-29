@@ -13,7 +13,7 @@
 
         <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
 
-
+<script src="presentation.js"> </script>
 
     </head>
     <body>
@@ -48,33 +48,16 @@
                 </form></div>
 
             <nav>
-                <ul>
+                <ul id="nav">
 
-                    {%for Vara in varor%}
-                        {#obs regnr,marke,modell är i kolumnnamn i databasen#}
-                        <li><a href='index2.php?getinfoByKategori/{{Vara.kategori}}'>{{Vara.kategori}}</a></li>
-                        {%endfor%}
+                   
                 </ul>
             </nav>
 
             <main>
-                {%for Vara in varornaMain%}
-                    
-                    <table>
-                        <tr> 
-                            <td>{{Vara.id}}</td>
-                            <td>{{Vara.namn}}</td>
-                            <td><a href='index2.php?getinfo/{{Vara.id}}'><img src='{{Vara.bildurl}}' class="bild1"></a></td>
-                        </tr>
-                        <tr> 
-                            <td>{{Vara.infoshort}}</td>
-                            <td>{{Vara.pris}} SEK</td>
-                            <td><a href='index2.php?addtoCart/{{Vara.id}}'>Lägg till i kundvagn</a></td>
-                        </tr>
-                        
-                    
-                    
-                {%endfor%}
+                <ul id="lista">
+
+            </ul>
 
             </main>
 

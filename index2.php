@@ -10,18 +10,35 @@ include_once 'Controller.php';
 //arrayens innehåll:
 //$queryArray[0]=getAllCars
 $queryArray = explode('/', $_SERVER['PATH_INFO']);
+
 //instansierar ett nytt controller objekt
 $cont = new Controller();
 //anropar metod på controllerobjekt
 //blir tex $cont->getAllCars();
 
 
-if (method_exists($cont, $queryArray[1])) {
-    echo json_encode($cont->$queryArray[1]($queryArray[2]));
 
-   
-} else {
-  //  echo json_encode($cont->$queryArray[1]);
+if (method_exists($cont, $queryArray[1])) {
+    
+    switch ($queryArray[1]) {
+        case 'getAllavaror':
+            echo json_encode($cont->$queryArray[1]());
+            break;
+        case 'getKategories':
+            echo json_encode($cont->$queryArray[1]());
+            break;
+        case 'getinfoByKategori':
+            echo json_encode($cont->$queryArray[1]($queryArray[2]));
+            break;
+        case 'getinfo':
+            echo json_encode($cont->$queryArray[1]($queryArray[2]));
+            break;
+        
+    }
 }
+
+
+
+
 ?>
 
