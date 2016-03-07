@@ -20,13 +20,17 @@ function getAllavaror(data) {
                     
                     var img = document.createElement("img")
                     img.src = data[temp].bildurl;
+                    
+                   
         
                     li.innerHTML += data[temp].id + " ";
                     li.innerHTML += data[temp].namn + " ";
                     li.innerHTML += data[temp].kategori + " ";
-                    li.appendChild(img);
+                    li.innerHTML += data[temp].pris + " kr";
+                    //li.appendChild(img);
                     li.innerHTML += data[temp].infoshort + " ";
-                    li.innerHTML += data[temp].infolong + " ";
+                    
+                    
 
                     ul.appendChild(li);
 
@@ -50,25 +54,36 @@ function getAllavaror(data) {
                 
                 for (temp in data) {
                     /*  alert(data[temp].id);
-                     alert(data[temp].namn); */
+                     alert(data[temp].namn); */ 
 
-                    var li = document.createElement("li")
-                    var img = document.createElement("img")
+                    var li = document.createElement("li");
+                    var img = document.createElement("img");
                     img.src = data[temp].bildurl;
                    
+                   
+                    var laggtillikundvagn = document.createElement("input");
+                    laggtillikundvagn.type = "button";
+                    laggtillikundvagn.value = "Köp!";
+                    
+                    
+                    laggtillikundvagn.onclick="shoppingvagn.addToCart(new Vara("+data[temp].id+","+data[temp].namn+","+data[temp].kategori+","+data[temp].pris+","+data[temp].bildurl+","+data[temp].infoshort+","+data[temp].infolong+"))";
+                    
                     
 
                     li.innerHTML += data[temp].id + " ";
                     li.innerHTML += data[temp].namn + " ";
                     li.innerHTML += data[temp].kategori + " ";
-                    li.appendChild(img);
+                    li.innerHTML += data[temp].pris + " kr ";
+                   // li.appendChild(img);
                     li.innerHTML += data[temp].infoshort + " ";
                     li.innerHTML += data[temp].infolong + " ";
+                    li.appendChild(laggtillikundvagn);
 
                     ul.appendChild(li);
                   
 
                 }
+                
                 
             }
 
@@ -110,6 +125,8 @@ function getAllavaror(data) {
             $(document).ready(function () {
 
                 $.getJSON("index2.php/getKategories", getKategories);
+                
+                $("#testKnapp").click(visaInnehall);
                 
                
                 

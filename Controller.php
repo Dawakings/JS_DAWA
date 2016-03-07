@@ -90,9 +90,9 @@ class Controller {
     
 //Function för att visa kundvagns-vyn imklusive belopp att betala.
     public function showCart() {
-        $template = $this->twig->loadTemplate('kundvagn.twig');
+      /*  $template = $this->twig->loadTemplate('kundvagn.twig');
 
-        $template->display(array('kundvagnen' => $_SESSION['cart'], 'attBetala' => $this->belopp()));
+        $template->display(array('kundvagnen' => $_SESSION['cart'], 'attBetala' => $this->belopp())); */
     }
 
     public function addVara() {

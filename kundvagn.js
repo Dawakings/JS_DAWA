@@ -28,7 +28,7 @@ var ShoppingVagn = function(){
 	// Räknar upp antal för varan om den finns i arrayen
 	// - Om den inte! finns så läggs varan till i arrayen.
 	this.addToCart = function(vara){
-		
+		alert("Lägger till vara");
 		var found = false;
 		
 		var k = 0;
@@ -36,7 +36,7 @@ var ShoppingVagn = function(){
 		
 		while(k < korg.length){
 			
-			if( korg[k].id == vara.id ){
+			if( korg[k].id === vara.id ){
 				idExist = true;
 				break;
 			}			
@@ -46,7 +46,7 @@ var ShoppingVagn = function(){
 		// Loopar igenom för att se om varan finns i korgarrayen, då ökar vi dess antal med 1
 		// Vidare sätts variabeln "found" till true om varan hittats
 		for( var i = 0; i < korg.length; i++ ){			
-			if(korg[i].marke == vara.marke){
+			if(korg[i].id === vara.id){
 				korg[i].antal++;
 				found=true;
 				break;
@@ -54,7 +54,7 @@ var ShoppingVagn = function(){
 		}// Slut på for loopen
 		
 		// Om varan inte finns i korgarrayen så lägg till den
-		if( found == false ){			
+		if( found === false ){			
 			//push metoden lägger vara till slutet av arrayen
 			korg.push(vara);			
 		}// end if
@@ -98,7 +98,13 @@ var ShoppingVagn = function(){
 	// Tar bort en specifik vara baserat på id, om den finns i arrayen.
 	this.deleteFromCart = function(vara){
 		
-		// Kod för att ta bort en specifik vara
+		for( var i = 0; i < korg.length; i++ ){			
+			if(korg[i].id === vara.id){
+				korg[i].antal--;
+				found=true;
+				break;
+			}// if
+		}// for
 				
 	}// Slut på metoden deleteFromCart
 	
@@ -111,19 +117,24 @@ var shoppingvagn = new ShoppingVagn();
 
 function visaInnehall()
 {
+   // alert("Kundvagnen");
 	var cart = shoppingvagn.getCart();
-	var mydiv = document.getElementById("visa");
+	var kundvagnen = document.getElementById("kundvagn");
 	
 	var data = '';
+        
 	
 	// Bygger upp en tabell med innehållet
 	data = '<h3>Kundvagn:</h3><table border="1">';
+         
+    
 	
 	for( var i = 0; i < cart.length; i++ ){
+           alert(cart[i].namn + " lägger till i kundvagn");
 		
 		data += '<tr>';				 
-		data += '<td><img src="'+cart[i].bild+'" width="32" height="32"></td>' + 
-		'<td>' + cart[i].marke  + '</td>' + 
+		
+		'<td>' + cart[i].namn  + '</td>' + 
 		'<td>' + cart[i].antal + '</td>' + 
 		'<td>' + cart[i].pris  + '</td>' + 
 		'<td>' + cart[i].antal * cart[i].pris + 'kr</td>' + 
@@ -134,5 +145,13 @@ function visaInnehall()
 	data += '<tr><td colspan="5" align="right"><button onclick="shoppingvagn.emptyCart(), visaInnehall()">Töm kundvagnen</button></td></tr>';
 	data += '</table>';
 
-	mydiv.innerHTML=data;
+	 kundvagnen.innerHTML=data;
+        
+      //  kundvagnen.appendChild(data);
+        
+  
 }
+
+
+
+
