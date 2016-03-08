@@ -28,7 +28,7 @@ var ShoppingVagn = function(){
 	// Räknar upp antal för varan om den finns i arrayen
 	// - Om den inte! finns så läggs varan till i arrayen.
 	this.addToCart = function(vara){
-		alert("Lägger till vara");
+		// alert("Lägger till vara");
 		var found = false;
 		
 		var k = 0;
@@ -123,16 +123,21 @@ function visaInnehall()
 	
 	var data = '';
         
+        alert(cart.length);
+        
 	
 	// Bygger upp en tabell med innehållet
 	data = '<h3>Kundvagn:</h3><table border="1">';
+        
+       
          
     
 	
 	for( var i = 0; i < cart.length; i++ ){
-           alert(cart[i].namn + " lägger till i kundvagn");
+          // alert(cart[i].namn + " lägger till i kundvagn. Visa innehåll");
 		
-		data += '<tr>';				 
+		data += '<tr>';	
+                '<p>'+'Testar'+'</p>';
 		
 		'<td>' + cart[i].namn  + '</td>' + 
 		'<td>' + cart[i].antal + '</td>' + 

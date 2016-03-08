@@ -18,7 +18,7 @@ function getAllavaror(data) {
 
                     var li = document.createElement("li")
                     
-                    var img = document.createElement("img")
+                    var img = document.createElement("img");
                     img.src = data[temp].bildurl;
                     
                    
@@ -26,7 +26,7 @@ function getAllavaror(data) {
                     li.innerHTML += data[temp].id + " ";
                     li.innerHTML += data[temp].namn + " ";
                     li.innerHTML += data[temp].kategori + " ";
-                    li.innerHTML += data[temp].pris + " kr";
+                    li.innerHTML += data[temp].pris + " kr ";
                     //li.appendChild(img);
                     li.innerHTML += data[temp].infoshort + " ";
                     
@@ -66,10 +66,11 @@ function getAllavaror(data) {
                     laggtillikundvagn.value = "Köp!";
                     
                     
-                    laggtillikundvagn.onclick="shoppingvagn.addToCart(new Vara("+data[temp].id+","+data[temp].namn+","+data[temp].kategori+","+data[temp].pris+","+data[temp].bildurl+","+data[temp].infoshort+","+data[temp].infolong+"))";
-                    
-                    
-
+                   // laggtillikundvagn.onclick="shoppingvagn.addToCart(new Vara("+data[temp].id+","+data[temp].namn+","+data[temp].kategori+","+data[temp].pris+","+data[temp].bildurl+","+data[temp].infoshort+","+data[temp].infolong+"))";
+                   
+                    laggtillikundvagn.onclick=shoppingvagn.addToCart(new Vara(data[temp].id,data[temp].namn,data[temp].kategori,data[temp].pris,data[temp].bildurl,data[temp].infoshort,data[temp].infolong));
+                            
+                            
                     li.innerHTML += data[temp].id + " ";
                     li.innerHTML += data[temp].namn + " ";
                     li.innerHTML += data[temp].kategori + " ";
@@ -80,9 +81,19 @@ function getAllavaror(data) {
                     li.appendChild(laggtillikundvagn);
 
                     ul.appendChild(li);
+                    
+                /*    $("input").click(function() {
+                   alert("testarKnapp");
+                   
+                    
+                    
+                     
+                }); */
                   
 
-                }
+                } //loop
+                
+                
                 
                 
             }
@@ -97,7 +108,7 @@ function getAllavaror(data) {
 
 
 
-                    var li = document.createElement("li")   
+                    var li = document.createElement("li");   
 
 
                     li.innerHTML += data[temp].kategori + " ";
