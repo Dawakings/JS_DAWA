@@ -68,8 +68,9 @@ function getAllavaror(data) {
                     
                    // laggtillikundvagn.onclick="shoppingvagn.addToCart(new Vara("+data[temp].id+","+data[temp].namn+","+data[temp].kategori+","+data[temp].pris+","+data[temp].bildurl+","+data[temp].infoshort+","+data[temp].infolong+"))";
                    
-                    laggtillikundvagn.onclick=shoppingvagn.addToCart(new Vara(data[temp].id,data[temp].namn,data[temp].kategori,data[temp].pris,data[temp].bildurl,data[temp].infoshort,data[temp].infolong));
-                            
+                 //  laggtillikundvagn.onclick=shoppingvagn.addToCart(new Vara(data[temp].id,data[temp].namn,data[temp].kategori,data[temp].pris,data[temp].bildurl,data[temp].infoshort,data[temp].infolong));
+                       
+                  //  laggtillikundvagn.onclick="shoppingvagn.addToCart"(new Vara(data[temp].id,data[temp].namn,data[temp].kategori,data[temp].pris,data[temp].bildurl,data[temp].infoshort,data[temp].infolong));
                             
                     li.innerHTML += data[temp].id + " ";
                     li.innerHTML += data[temp].namn + " ";
@@ -79,17 +80,13 @@ function getAllavaror(data) {
                     li.innerHTML += data[temp].infoshort + " ";
                     li.innerHTML += data[temp].infolong + " ";
                     li.appendChild(laggtillikundvagn);
+                    
+                    
 
                     ul.appendChild(li);
                     
-                /*    $("input").click(function() {
-                   alert("testarKnapp");
-                   
-                    
-                    
-                     
-                }); */
-                  
+                
+                  laggtillikundvagn.onclick=shoppingvagn.addToCart(new Vara(data[temp].id,data[temp].namn,data[temp].kategori,data[temp].pris,data[temp].bildurl,data[temp].infoshort,data[temp].infolong));
 
                 } //loop
                 

@@ -97,17 +97,10 @@ class Controller {
 
     public function addVara() {
 
-        $errorArray = $this->validate(); //anropar validatormetod.
-       // var_dump($errorArray);
-        /*Om felmeddelande returneras så skrivs detta ut, om inget fel finns 
-         * så utförs operationen.*/
-        if (count($errorArray) == 0) {
+       
             $this->model->addVara();
-            $this->showAdmin();
-        } else {
-            $template = $this->twig->loadTemplate('admin.twig');
-            $template->display(array('error' => $errorArray));
-        }
+            
+        
     }
 
     public function showError() {

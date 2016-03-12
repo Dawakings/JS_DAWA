@@ -46,7 +46,7 @@ var ShoppingVagn = function(){
 		// Loopar igenom för att se om varan finns i korgarrayen, då ökar vi dess antal med 1
 		// Vidare sätts variabeln "found" till true om varan hittats
 		for( var i = 0; i < korg.length; i++ ){			
-			if(korg[i].id === vara.id){
+			if(korg[i].namn === vara.namn){
 				korg[i].antal++;
 				found=true;
 				break;
