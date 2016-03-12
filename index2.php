@@ -33,6 +33,15 @@ if (method_exists($cont, $queryArray[1])) {
         case 'getinfo':
             echo json_encode($cont->$queryArray[1]($queryArray[2]));
             break;
+        case 'addVara':
+            echo json_encode($cont->$queryArray[1]());
+            break;
+        case 'deleteVara':
+            echo json_encode($cont->$queryArray[1]());
+            break;
+        case 'updateVara':
+            echo json_encode($cont->$queryArray[1]());
+            break;
         
     }
 }
