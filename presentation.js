@@ -16,7 +16,7 @@ function getAllavaror(data) {
         /*  alert(data[temp].id);
          alert(data[temp].namn); */
 
-        var li = document.createElement("li")
+        var li = document.createElement("li");
 
         var img = document.createElement("img");
         img.src = data[temp].bildurl;
@@ -66,11 +66,23 @@ function getInfo(data) {
         laggtillikundvagn.value = "Köp!";
 
 
-        // laggtillikundvagn.onclick="shoppingvagn.addToCart(new Vara("+data[temp].id+","+data[temp].namn+","+data[temp].kategori+","+data[temp].pris+","+data[temp].bildurl+","+data[temp].infoshort+","+data[temp].infolong+"))";
+       //  laggtillikundvagn.onclick="shoppingvagn.addToCart(new Vara("+data[temp].id+","+data[temp].namn+","+data[temp].kategori+","+data[temp].pris+","+data[temp].bildurl+"))";
 
-        //  laggtillikundvagn.onclick=shoppingvagn.addToCart(new Vara(data[temp].id,data[temp].namn,data[temp].kategori,data[temp].pris,data[temp].bildurl,data[temp].infoshort,data[temp].infolong));
+        // laggtillikundvagn.onclick=shoppingvagn.addToCart(new Vara(data[temp].id,data[temp].namn,data[temp].kategori,data[temp].pris,data[temp].bildurl));
 
-        //  laggtillikundvagn.onclick="shoppingvagn.addToCart"(new Vara(data[temp].id,data[temp].namn,data[temp].kategori,data[temp].pris,data[temp].bildurl,data[temp].infoshort,data[temp].infolong));
+        //  laggtillikundvagn.onclick="shoppingvagn.addToCart"(new Vara(data[temp].id,data[temp].namn,data[temp].kategori,data[temp].pris,data[temp].bildurl));
+        
+       /* laggtillikundvagn.onclick="shoppingvagn.addToCart(new Vara("
+                data[temp].id + "\",\"" +
+                data[temp].namn + "\",\"" +
+                data[temp].kategori + "\",\"" +
+                data[temp].pris + "\",\"" +
+                data[temp].bildurl + "\",\"" + 
+                "\"));"; */
+        
+        $(laggtillikundvagn).click(function () {
+            shoppingvagn.addToCart(new Vara(data[temp].id,data[temp].namn,data[temp].kategori,data[temp].pris,data[temp].bildurl));
+        }); 
 
         li.innerHTML += data[temp].id + " ";
         li.innerHTML += data[temp].namn + " ";
@@ -81,14 +93,16 @@ function getInfo(data) {
         li.innerHTML += data[temp].infolong + " ";
         li.appendChild(laggtillikundvagn);
 
+    
 
 
         ul.appendChild(li);
 
-
-        laggtillikundvagn.onclick = shoppingvagn.addToCart(new Vara(data[temp].id, data[temp].namn, data[temp].kategori, data[temp].pris, data[temp].bildurl, data[temp].infoshort, data[temp].infolong));
-
+W
+        
     } //loop
+    
+    
 
 
 
@@ -99,7 +113,7 @@ function getKategories(data) {
 
     //    alert(data[0].id);
 
-    var ul = document.getElementById("nav");
+    var ul = document.getElementById("navUl");
     for (temp in data) {
 
 
@@ -131,28 +145,7 @@ function getKategories(data) {
  });*/
 
 
-function createLoginForm() {
-    var divLoggain = document.getElementById("loggain");
-    var loginForm = document.createElement("form");
-    var username = document.createElement("input");
-    var passw = document.createElement("input");
-    
-    var txtuser = document.createElement("span");
-    var txtpassw = document.createElement("span");
-    
-    username.type = "text";
-    passw.type = "password";
-    txtuser.value = "Userid: ";
-    txtpassw.value = " lösenord: ";
-    loginForm.appendChild(txtuser);
-    loginForm.appendChild(username);
-    loginForm.appendChild(txtpassw);
-    loginForm.appendChild(passw);
-    
-    divLoggain.appendChild(loginForm);
-    
-    
-}
+
 
 function getAllavarorAdmin(data) {
 
@@ -194,6 +187,74 @@ function getAllavarorAdmin(data) {
     
 
 }
+function createLoginForm() {
+    var divLoggain = document.getElementById("loggain");
+    var loginForm = document.createElement("form");
+    var username = document.createElement("input");
+    var passw = document.createElement("input");
+    
+    var txtuser = document.createElement("span");
+    var txtpassw = document.createElement("span");
+    var p = document.createElement("p");
+    var buttonLogIn = document.createElement("input");
+    var buttonLogout = document.createElement("input");
+    var logutForm = document.createElement("form");
+    
+    
+    loginForm.method = "POST";
+    p.innerHTML = "Logga in som administarör: ";
+    username.type = "text";
+    passw.type = "password";
+    username.name = "user";
+    passw.name = "pwd";
+    txtuser.innerHTML = "Userid: ";
+    txtpassw.innerHTML = " lösenord: ";
+    buttonLogIn.type = "button";
+    buttonLogIn.value = "Logga in!";
+    buttonLogout.type = "button";
+    buttonLogout.value = "Logga ut!";
+    
+    
+    loginForm.appendChild(txtuser);
+    loginForm.appendChild(username);
+    loginForm.appendChild(txtpassw);
+    loginForm.appendChild(passw);
+    loginForm.appendChild(buttonLogIn);
+    logutForm.appendChild(buttonLogout);
+    
+    $(buttonLogout).hide();
+    
+    
+    
+    $(buttonLogIn).click(function() {
+        
+        
+        if ($(username).val() === "admin" && $(passw).val() === "admin") {
+            
+           $(buttonLogout).show();
+           
+          createForm();
+          
+          $(loginForm).hide();
+          logutForm.appendChild(buttonLogout);
+          
+          $.getJSON("index2.php/getAllavaror", getAllavarorAdmin);
+            
+            
+            
+        } else {
+            alert("Fel user/password");
+        } 
+        
+    });
+    
+    $(buttonLogout).click(function(){
+      location.reload();
+    });
+    
+    divLoggain.appendChild(loginForm);
+    divLoggain.appendChild(logutForm);
+   }
 
 
 
@@ -379,11 +440,11 @@ $(document).ready(function () {
 
     $.getJSON("index2.php/getKategories", getKategories);
 
-    $.getJSON("index2.php/getAllavaror", getAllavarorAdmin);
+ 
+    
+    createLoginForm();
 
-    createForm();
-
-    $("#testKnapp").click(visaInnehall);
+    
 
 
 

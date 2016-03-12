@@ -1,13 +1,11 @@
-var Vara = function(id,namn,kategori,pris,bildurl,infoshort,infolong){
+var Vara = function(id,namn,kategori,pris,bildurl){
 	this.id = id;
 	this.namn = namn;
 	this.kategori = kategori;
 	this.pris = pris;
 	this.bildurl = bildurl;
-        this.infoshort = infoshort;
-        this.infolong = infolong;
 	this.antal=1;		
-}
+};
 
 var ShoppingVagn = function(){
 	// Array som ska hålla alla varor i korgen
@@ -92,7 +90,7 @@ var ShoppingVagn = function(){
 		// Loopar igenom för att se om varan finns i korgarrayen, då ökar vi dess antal med 1
 		// Vidare sätts variabeln "found" till true om varan hittats
 		for( var i = 0; i < korg.length; i++ ){			
-			if(korg[i].antal > 1 && korg[i].produktnamn === vara.produktnamn){
+			if(korg[i].antal > 1 && korg[i].namn === vara.namn){
 				korg[i].antal--;
 				found=true;
 				break;
@@ -101,7 +99,7 @@ var ShoppingVagn = function(){
 		
                 var result = 0;
                 for( var i = 0, len = korg.length; i < len; i++ ) {
-                    if( korg[i].produktnamn === vara.produktnamn) {
+                    if( korg[i].namn === vara.namn) {
                     result = i;
                     break;
                     }
@@ -153,105 +151,29 @@ var shoppingvagn = new ShoppingVagn();
 
 function visaInnehall(){
                    
-                    var mainKundvagn = document.createElement('div');
-                    mainKundvagn.setAttribute('id', 'mainKundvagn');
-                    var tbl = document.createElement('table');
-                    tbl.setAttribute('border', '1');
-                    var tr = document.createElement('tr');
-                    var tr1 = document.createElement('tr');
-
-                    var th2 = document.createElement('th');
-                    var txt2 = document.createTextNode('Produktid | ');
-
-                    var th3 = document.createElement('th');
-                    var txt3 = document.createTextNode(' Produktnamn | ');
-
-                    var th4 = document.createElement('th');
-                    var txt4 = document.createTextNode('Kategori | ');
-
-                    var th5 = document.createElement('th');
-                    var txt5 = document.createTextNode(' Pris | ');
-                    
-                    var th6 = document.createElement('th');
-                    var txt6 = document.createTextNode(' Img | ');
-
-                    var th7 = document.createElement('th');
-                    var txt7 = document.createTextNode(' Antal |');
-
-                    var th8 = document.createElement('th');
-                    var txt8 = document.createTextNode(' Delete |');
-                    
-                    var td = document.createElement('td');
-                    td.colSpan="8";
-                    td.style.textAlign="right";
-
-
-                    /*th1.appendChild(txt1);
-                    tr.appendChild(th1);*/
-
-                    th2.appendChild(txt2);
-                    tr.appendChild(th2);
-
-                    th3.appendChild(txt3);
-                    tr.appendChild(th3);
-
-                    th4.appendChild(txt4);
-                    tr.appendChild(th4);
-
-                    th5.appendChild(txt5);
-                    tr.appendChild(th5);
-
-                    th6.appendChild(txt6);
-                    tr.appendChild(th6);
-                    
-                    th7.appendChild(txt7);
-                    tr.appendChild(th7);
-
-                    th8.appendChild(txt8);
-                    tr.appendChild(th8);
-
-                    tbl.appendChild(tr);
-                   
                     var cart = shoppingvagn.getCart();
-                
-                for( var i = 0; i < cart.length; i++ ){
-                    var row = tbl.insertRow(-1);
-                    row.innerHTML = cart[i].produktid;
-                    var cell2 = row.insertCell(-1);
-                    cell2.innerHTML = cart[i].produktnamn;
-                    var cell3 = row.insertCell(-1);
-                    cell3.innerHTML = cart[i].kategori;
-                    var cell5 = row.insertCell(-1);
-                    cell5.innerHTML = cart[i].pris;
-                    var cell6 = row.insertCell(-1);
-                    cell6.innerHTML = '<img src="' + cart[i].img + '" height="70" width="70"/>';
-                    var cell7 = row.insertCell(-1);
-                    cell7.innerHTML = "<button onclick='shoppingvagn.deleteFromCart(new Vara(\"" + 
-                            cart[i].kategori + "\",\"" + 
-                            cart[i].namn + "\",\"" + 
-                            cart[i].pris +  "\",\"" +
-                            cart[i].bildurl + "\",\"" +
-                            cart[i].antal +  "\",\""+ "\"));'>▼</button>" + "  " +
-                            "<button onclick='shoppingvagn.addToCart(new Vara(\"" + 
-                            cart[i].kategori + "\",\"" + 
-                            cart[i].namn + "\",\"" + 
-                            cart[i].pris +  "\",\"" + 
-                            cart[i].bildurl + "\",\"" +
-                            cart[i].antal +  "\",\""+ "\"));'>▲</button>" + "  " +
-                            cart[i].antal;
-                    var cell8 = row.insertCell(-1);
-                    cell8.innerHTML = "<button onclick='shoppingvagn.deleteAllFromCart(new Vara(\"" + 
-                            cart[i].kategori + "\",\"" + 
-                            cart[i].namn + "\",\"" + 
-                            cart[i].pris +  "\",\"" +
-                            cart[i].bildurl + "\",\"" +
-                            cart[i].antal +  "\",\""+ "\"));'>Remove</button>";
-                    tbl.appendChild(row);
-                }
-                    var txt9 = document.createTextNode('To pay: '+shoppingvagn.getAmount()+" kr");
-                    td.appendChild(txt9);
-                    tr1.appendChild(td);
-                    tbl.appendChild(tr1);
-                    mainKundvagn.appendChild(tbl);
-                    $('#kundvagn').html(mainKundvagn);
+	var mydiv = document.getElementById("kundvagn");
+	
+	var data = '';
+	
+	// Bygger upp en tabell med innehållet
+	data = '<h3>Kundvagn:</h3><table border="1">';
+	
+	for( var i = 0; i < cart.length; i++ ){
+		
+		data += '<tr>';				 
+		data += '<td><img src="'+cart[i].bildurl+'" width="32" height="32"></td>' +
+                '<td>' + cart[i].id  + '</td>' + 
+		'<td>' + cart[i].namn  + '</td>' + 
+		'<td>' + cart[i].antal + '</td>' + 
+		'<td>' + cart[i].pris  + '</td>' + 
+		'<td>' + cart[i].antal * cart[i].pris + 'kr</td>' + 
+		'</tr>';
+	 
+	}//end for
+	data += '<tr><td colspan="5" align="right">Att Betala ' + shoppingvagn.getAmount() + 'kr</td></tr>';
+	data += '<tr><td colspan="5" align="right"><button onclick="shoppingvagn.emptyCart(), visaInnehall()">Töm kundvagnen</button></td></tr>';
+	data += '</table>';
+
+	mydiv.innerHTML=data;
                 }

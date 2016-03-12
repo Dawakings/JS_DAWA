@@ -94,15 +94,11 @@ class Controller {
 /*Funktion för att administratör ska kunna logga in. Felmeddelande visas i vyn
 om man försöker logga in med felaktigt användarnamn/lösenord. Om rätt så visas admin-vyn. */
     public function login() {
-        if (strip_tags($_POST['username']) == 'admin' && strip_tags($_POST['password']) == 'admin') {
-            $_SESSION['loggedin'] = TRUE;
-            $this->showAdmin();
+        if (strip_tags($_POST['user']) == 'admin' && strip_tags($_POST['pwd']) == 'admin') {
+            return true;
+            
         } else {
-            $_SESSION['loggedin'] = FALSE;
-
-            $template = $this->twig->loadTemplate('hemsida_ny.twig');
-
-            $template->display(array('loginerror' => 'Felaktigt användarnamn/Lösenord. Logga in med "admin""admin"'));
+           return false; 
         }
     }
 
