@@ -2,15 +2,17 @@
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
+ * 
+ * 
  */
 
 function getAllavaror(data) {
 
     //    alert(data[0].id);
 
-    var ul = document.getElementById("lista");
+    var ul = document.getElementById("lista"); //hämat Element by ID
 
-    ul.innerHTML = "";
+    ul.innerHTML = ""; //tömmer mellan taggarna  i elememtet
 
     for (temp in data) {
         /*  alert(data[temp].id);
@@ -19,7 +21,7 @@ function getAllavaror(data) {
         var li = document.createElement("li");
 
         var img = document.createElement("img");
-        img.src = data[temp].bildurl;
+        img.src = data[temp].bildurl; //säter atributet src
 
 
 
@@ -32,10 +34,11 @@ function getAllavaror(data) {
 
 
 
-        ul.appendChild(li);
+        ul.appendChild(li); //lägger till på slutet av elementet.
 
     }
-
+/*Klickfunktion med jquery. När man klickar på en kategori så hämtas data
+ * om den kategorin med JSON ifrån index2.php*/
     $("li").click(function () {
         //alert($(this).text());
 
@@ -66,23 +69,30 @@ function getInfo(data) {
         laggtillikundvagn.value = "Köp!";
 
 
-       //  laggtillikundvagn.onclick="shoppingvagn.addToCart(new Vara("+data[temp].id+","+data[temp].namn+","+data[temp].kategori+","+data[temp].pris+","+data[temp].bildurl+"))";
+        //  laggtillikundvagn.onclick="shoppingvagn.addToCart(new Vara("+data[temp].id+","+data[temp].namn+","+data[temp].kategori+","+data[temp].pris+","+data[temp].bildurl+"))";
 
         // laggtillikundvagn.onclick=shoppingvagn.addToCart(new Vara(data[temp].id,data[temp].namn,data[temp].kategori,data[temp].pris,data[temp].bildurl));
 
         //  laggtillikundvagn.onclick="shoppingvagn.addToCart"(new Vara(data[temp].id,data[temp].namn,data[temp].kategori,data[temp].pris,data[temp].bildurl));
+
+        /* laggtillikundvagn.onclick="shoppingvagn.addToCart(new Vara("
+         data[temp].id + "\",\"" +
+         data[temp].namn + "\",\"" +
+         data[temp].kategori + "\",\"" +
+         data[temp].pris + "\",\"" +
+         data[temp].bildurl + "\",\"" + 
+         "\"));"; */
         
-       /* laggtillikundvagn.onclick="shoppingvagn.addToCart(new Vara("
-                data[temp].id + "\",\"" +
-                data[temp].namn + "\",\"" +
-                data[temp].kategori + "\",\"" +
-                data[temp].pris + "\",\"" +
-                data[temp].bildurl + "\",\"" + 
-                "\"));"; */
-        
-        $(laggtillikundvagn).click(function () {
-            shoppingvagn.addToCart(new Vara(data[temp].id,data[temp].namn,data[temp].kategori,data[temp].pris,data[temp].bildurl));
+        /*
+         * $(laggtillikundvagn).click(function () {
+            shoppingvagn.addToCart(new Vara(data[temp].id, data[temp].namn, data[temp].kategori, data[temp].pris, data[temp].bildurl));
         }); 
+         */
+
+        // Klicka för att lägga till i vara.
+        $(laggtillikundvagn).click(function () {
+            shoppingvagn.addToCart(new Vara(data[temp].id, data[temp].namn, data[temp].pris, data[temp].bildurl));
+        });
 
         li.innerHTML += data[temp].id + " ";
         li.innerHTML += data[temp].namn + " ";
@@ -93,16 +103,16 @@ function getInfo(data) {
         li.innerHTML += data[temp].infolong + " ";
         li.appendChild(laggtillikundvagn);
 
-    
+
 
 
         ul.appendChild(li);
 
-W
-        
+
+
     } //loop
-    
-    
+
+
 
 
 
@@ -183,28 +193,30 @@ function getAllavarorAdmin(data) {
         ulAdmin.appendChild(li2);
 
     }//loop
-    
-    
+
+
 
 }
+
+/*Funktoon för att skapa upp formulär för att logga in. */
 function createLoginForm() {
     var divLoggain = document.getElementById("loggain");
     var loginForm = document.createElement("form");
     var username = document.createElement("input");
     var passw = document.createElement("input");
-    
+
     var txtuser = document.createElement("span");
     var txtpassw = document.createElement("span");
     var p = document.createElement("p");
     var buttonLogIn = document.createElement("input");
     var buttonLogout = document.createElement("input");
     var logutForm = document.createElement("form");
-    
-    
-    loginForm.method = "POST";
+
+
+    loginForm.method = "POST"; //data skickas med HTTP_POST
     p.innerHTML = "Logga in som administarör: ";
     username.type = "text";
-    passw.type = "password";
+    passw.type = "password"; //input syns som **** på skärmen.
     username.name = "user";
     passw.name = "pwd";
     txtuser.innerHTML = "Userid: ";
@@ -213,48 +225,54 @@ function createLoginForm() {
     buttonLogIn.value = "Logga in!";
     buttonLogout.type = "button";
     buttonLogout.value = "Logga ut!";
-    
-    
+
+
     loginForm.appendChild(txtuser);
     loginForm.appendChild(username);
     loginForm.appendChild(txtpassw);
     loginForm.appendChild(passw);
     loginForm.appendChild(buttonLogIn);
     logutForm.appendChild(buttonLogout);
-    
+
     $(buttonLogout).hide();
-    
-    
-    
-    $(buttonLogIn).click(function() {
-        
-        
+
+
+
+    $(buttonLogIn).click(function () {
+/*Kollar om admin loggar in med korrekta uppgifter.*/
+
         if ($(username).val() === "admin" && $(passw).val() === "admin") {
+
+
+            $(buttonLogout).show(); //visar logga ut knapp
+
+            createForm(); //visar adminform
+
+            $(loginForm).hide(); //döljer logga in formuläret.
+            logutForm.appendChild(buttonLogout);
+
+            $.getJSON("index2.php/getAllavaror", getAllavarorAdmin);
             
-           $(buttonLogout).show();
-           
-          createForm();
-          
-          $(loginForm).hide();
-          logutForm.appendChild(buttonLogout);
-          
-          $.getJSON("index2.php/getAllavaror", getAllavarorAdmin);
             
-            
-            
+
+
         } else {
-            alert("Fel user/password");
-        } 
-        
+            alert("Fel user/password"); //popup
+        }
+
     });
-    
-    $(buttonLogout).click(function(){
-      location.reload();
+
+    $(buttonLogout).click(function () {
+        location.reload(); //loggar ut genom att refresha sidan.
     });
-    
+
     divLoggain.appendChild(loginForm);
     divLoggain.appendChild(logutForm);
-   }
+
+
+}
+
+
 
 
 
@@ -266,24 +284,24 @@ function createForm() {
     var formDelete = document.createElement("form");
     var formUpdate = document.createElement("form");
     var formAdd = document.createElement("form");
-    
-    
-
-    formDelete.action = "index2.php/deleteVara";
-    formDelete.method = "POST";
-    
-
-
-    formUpdate.action = "index2.php/updateVara";
-    formUpdate.method = "POST";
-    
 
 
 
+    // formDelete.action = "index2.php/deleteVara";
+    // formDelete.method = "POST";
 
-    formAdd.action = "index2.php/addVara";
-    formAdd.method = "POST";
-    
+
+
+    // formUpdate.action = "index2.php/updateVara";
+    // formUpdate.method = "POST";
+
+
+
+
+
+    //  formAdd.action = "index2.php/addVara";
+    // formAdd.method = "POST";
+
 
 
     var iidR = document.createElement("input");
@@ -299,7 +317,7 @@ function createForm() {
     var skickaU = document.createElement("input");
 
     var iidA = document.createElement("input");
-    
+
     var inamnA = document.createElement("input");
     var ikategoriA = document.createElement("input");
     var iprisA = document.createElement("input");
@@ -307,8 +325,8 @@ function createForm() {
     var iinfoshortA = document.createElement("input");
     var iinfolongA = document.createElement("input");
     var skickaA = document.createElement("input");
-    
-    
+
+
 
 
     iidR.type = "text";
@@ -335,13 +353,20 @@ function createForm() {
     iinfoshortU.value = "kort info";
     iinfolongU.value = "lång info";
     skickaU.value = "Uppdatera på ID";
-    /*  iidU.onclick="this.value=''";
+    
+   /* iidU.onclick="(this).value=''";
      inamnU.onclick="this.value=''";
      ikategoriU.onclick="this.value=''";
      iprisU.onclick="this.value=''";
      ibildurlU.onclick="this.value=''";
      iinfoshortU.onclick="this.value=''";
      iinfolongU.onclick="this.value=''"; */
+     
+     $(":text").click(function (){
+         $(this).val().val("");
+     });
+     /*Har försökt att få inoutfältet tömt när användaren klickar i det, men har inte
+      * fått funktionen att fungera som tänkt.*/
 
 
 
@@ -363,12 +388,13 @@ function createForm() {
     iinfoshortA.value = "kort info";
     iinfolongA.value = "lång info";
     skickaA.value = "Lägg till vara";
-    /*   inamnA.onClick="this.value=''";
+    
+    inamnA.onClick="this.value=''";
      ikategoriA.onClick="this.value=''";
      iprisA.onClick="this.value=''";
      ibildurlA.onClick="this.value=''";
      iinfoshortA.onClick="this.value=''";
-     iinfolongA.onClick="this.value=''"; */
+     iinfolongA.onClick="this.value=''"; 
 
     iidR.name = "id";
 
@@ -425,26 +451,116 @@ function createForm() {
     //visa
 
 
-
+    divRadera.appendChild(document.createElement("br"));
     divRadera.appendChild(formDelete);
+    divRadera.appendChild(document.createElement("hr"));
+    divUppdatera.appendChild(document.createElement("br"));
     divUppdatera.appendChild(formUpdate);
+    divUppdatera.appendChild(document.createElement("hr"));
+    divAdd.appendChild(document.createElement("br"));
     divAdd.appendChild(formAdd);
+    
+    divRadera.style.overflow = "scroll";
+    divUppdatera.style.overflow = "scroll";
+    divAdd.style.overflow = "scroll";
+
+/* Läste på om POST med ajax.
+ * https://scotch.io/tutorials/submitting-ajax-forms-with-jquery 
+ * 
+ * */
+
+    //actionRadera
+
+    $(formDelete).on('submit', function (event) {
+        event.preventDefault(); //förhindrar refresh av sidan vid submit
+        $.ajax({
+            type: "POST", //method
+            url: "index2.php/deleteVara", //action
+            data: $(formDelete).serialize() //string av fältens name + värde.
+            
+
+        }).done(function () {
+            alert("Varan " + $(iidR).val() + " är raderat ");
+            // alert($(formDelete).serialize());
+
+
+
+            $.getJSON("index2.php/getAllavaror", getAllavarorAdmin); //visar uppdaterad lista
+
+        });
+
+    });
+
+//uppdatera
+
+    $(formUpdate).on('submit', function (event) {
+        event.preventDefault();
+        $.ajax({
+            type: "POST",
+            url: "index2.php/updateVara",
+            data: $(formUpdate).serialize()
+        }).done(function () {
+            alert("Varan " + $(iidU).val() + " är updaterad ");
+
+            $.getJSON("index2.php/getAllavaror", getAllavarorAdmin);
+        });
+    });
+
+
+//Lägga till
+    $(formAdd).on('submit', function (event) {
+        event.preventDefault();
+        $.ajax({
+            type: "POST",
+            url: "index2.php/addVara",
+            data: $(formAdd).serialize()
+        }).done(function () {
+            alert("Varan " + $(inamnA).val() + " är tillagd ");
+
+            $.getJSON("index2.php/getAllavaror", getAllavarorAdmin);
+        });
+    });
+
+
 
 }
 
 
 
 
+/*Körs när sidan har läst in, fungerar bra att lägga in funktioner som ska 
+ * köras ifårn början.*/
 
 $(document).ready(function () {
 
     $.getJSON("index2.php/getKategories", getKategories);
 
- 
-    
-    createLoginForm();
 
+
+    createLoginForm();
     
+    $("#linkKundvagn").click(function (event) {
+        event.preventDefault();
+        visaInnehall();
+        event.preventDefault();
+    });
+    
+    
+    
+    $("#linkLogg").click(function (event) {
+        event.preventDefault();
+        location.reload();
+        
+    });
+    
+
+  
+    
+    
+    
+    
+
+
 
 
 

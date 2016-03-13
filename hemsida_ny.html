@@ -3,42 +3,45 @@
     <head>
         <meta name="robots" content="noindex, nofollow">
 
-        <title>Good Data</title>
+        <title>IK1005 - Good Data</title>
 
         <meta charset="UTF-8">
 
         <meta name="viewport" content="width=device-width,initial-scale=1.0">
 
-        <link rel="stylesheet" type="text/css" href="..//start/style_ny.css">
+        <link rel="stylesheet" type="text/css" href="style_ny.css">
 
-        <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+        <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script> <!-- för RWD -->
 
-<script src="presentation.js"> </script>
+        <script src="kundvagn2.js"> </script> <!-- JS funktioner för kundvagnen -->
+        <script src="presentation.js"> </script> <!-- JS för presentationen på sidan -->
 
     </head>
     <body>
         <div class="container">
             <header class="logga">
-                <a href="index2.php?getKategories"> <img src="hemsida_bilder/logga.png" alt="Logga"></a>
+                <a href="#" id="linkLogg"> <img src="hemsida_bilder/logga.png" alt="Logga"></a>
             </header>
             <header class="rubrik">
                 <h1>Good Data</h1>
                 <h2 class="h2">Bra elektronik</h2>
-                
-                <form class="admin" action="index2.php?login" method="POST">
-                    Användarnamn <input type="text" name="username" > <br> Lösendord <input type="text" name="password" >  <input type="submit" value="Logga in som administratör" name="submit"> {{loginerror}}
-                </form>
+<div id="loggain">
+
+                </div>
+
             </header>
             <aside>
                 <form class="sok_over">
                     <input type="text" name="tf_sök">
                     <input type="submit" value="Sök" name="btn_sök">
                 </form>
-                <a href="index2.php?showCart">
+                <a href="#" id="linkKundvagn">
                     <img src="hemsida_bilder/shopping-cart-307772_960_720.png" alt="kundvagn">
                 </a>
                 
                 
+
+
             </aside>
 
             <div class="sok_mitten">
@@ -48,16 +51,58 @@
                 </form></div>
 
             <nav>
-                <ul id="nav">
+                <ul id="navUl">
 
-                   
+
                 </ul>
             </nav>
 
             <main>
                 <ul id="lista">
 
-            </ul>
+                </ul>
+
+                <div id="kundvagn">
+
+                </div>
+
+
+
+
+                
+                <hr>
+
+                <div id="visaAdmin">
+
+                    <ul id="listaAdmin">
+
+                    </ul>
+
+
+
+
+
+
+
+
+
+
+                </div>
+
+                <div id="radera">
+
+
+                </div>
+
+                <div id="uppdatera">
+
+
+                </div>
+
+                <div id="add">
+
+                </div>
+
 
             </main>
 
@@ -73,7 +118,7 @@
 
                 <div class="betalsätt"><p><strong>Betalsätt</strong><br>Konto-/kreditkort, faktura</p></div>
 
-                <div class="infoupdate"><script>document.write("Sidan uppdaterad " + document.lastModified);</script>
+                <div class="infoupdate"><script>document.write("Sidan uppdaterad " + document.lastModified);</script> <!-- Skriver ut datum och tid för senaste redigeringen -->
                     <br><br>
                     <img src="hemsida_bilder/support-self-storage-software_0.png" alt="Bild på kvinna/support">
                 </div>

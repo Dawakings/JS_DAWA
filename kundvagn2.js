@@ -1,12 +1,13 @@
-var Vara = function(id,namn,kategori,pris,bildurl){
+
+//konstrukor
+var Vara = function(id,namn,pris,bildurl){
 	this.id = id;
 	this.namn = namn;
-	this.kategori = kategori;
 	this.pris = pris;
 	this.bildurl = bildurl;
 	this.antal=1;		
 };
-
+//shoppingvangs-klass
 var ShoppingVagn = function(){
 	// Array som ska hålla alla varor i korgen
 	var korg = new Array();
@@ -71,7 +72,7 @@ var ShoppingVagn = function(){
 	// Returnerar varukorgen som array
 	this.getCart=function(){
 		return korg;
-	}
+	};
 	
 	// ********************************************************************************************
 	
@@ -79,7 +80,7 @@ var ShoppingVagn = function(){
 	// Tömmer hela varukorgen mha metoden splice() för arrayer i js
 	this.emptyCart=function(){
 		korg.splice(0);
-	}
+	};
 	
 	// ********************************************************************************************
 	
@@ -98,7 +99,7 @@ var ShoppingVagn = function(){
 		}// Slut på for loopen
 		
                 var result = 0;
-                for( var i = 0, len = korg.length; i < len; i++ ) {
+                for( var i = 0; i < korg.length; i++ ) {
                     if( korg[i].namn === vara.namn) {
                     result = i;
                     break;
@@ -112,14 +113,16 @@ var ShoppingVagn = function(){
 		visaInnehall();
 	}// Kod för att ta bort en specifik vara
 				
-	// Slut pp metoden deleteFromCart
 	
+	//metod för att tabort vara. 
+        
         this.deleteAllFromCart = function(vara){
+            alert("tryckte på radera");
             var found = false;
 		// Loopar igenom fÃ¶r att se om varan finns i korgarrayen, dÃ¥ Ã¶kar vi dess antal med 1
 		// Vidare sÃƒÂ¤tts variabeln "found" till true om varan hittats
 		for( var i = 0; i < korg.length; i++ ){			
-			if(korg[i].antal > 1 && korg[i].produktnamn === vara.produktnamn){
+			if(korg[i].antal > 1 && korg[i].namn === vara.namn){
 				korg[i].antal = 0;
 				
 				break;
@@ -127,8 +130,8 @@ var ShoppingVagn = function(){
 		}// Slut pÃƒÂ¥ for loopen
 		
                 var result = 0;
-                for( var i = 0, len = korg.length; i < len; i++ ) {
-                    if( korg[i].produktnamn === vara.produktnamn) {
+                for( var i = 0;  i < korg.length; i++ ) {
+                    if( korg[i].namn === vara.namn) {
                     result = i;
                     break;
                     }
@@ -148,8 +151,11 @@ var ShoppingVagn = function(){
 // Skapar upp min kundvagn (ett objekt av klassen ShoppingVagn)
 var shoppingvagn = new ShoppingVagn();
 
-
-function visaInnehall(){
+/*metod för att visa kundvagnen. Har avaktiverat funktionen då vi inte fick
+ * klick händelsen att fungera.*/
+ function visaInnehall(){
+    
+    
                    
                     var cart = shoppingvagn.getCart();
 	var mydiv = document.getElementById("kundvagn");
@@ -157,23 +163,40 @@ function visaInnehall(){
 	var data = '';
 	
 	// Bygger upp en tabell med innehållet
-	data = '<h3>Kundvagn:</h3><table border="1">';
+	data += '<h3>Kundvagn:</h3><table border="1" class"table">';
+        data += '<tr>';
+        data += '<th>Bild</th><th>Artikelnummer</th><th>Antal</th>'+
+                '<th>Pris</th><th>Att betala</th></tr>';
 	
 	for( var i = 0; i < cart.length; i++ ){
 		
 		data += '<tr>';				 
 		data += '<td><img src="'+cart[i].bildurl+'" width="32" height="32"></td>' +
                 '<td>' + cart[i].id  + '</td>' + 
-		'<td>' + cart[i].namn  + '</td>' + 
 		'<td>' + cart[i].antal + '</td>' + 
 		'<td>' + cart[i].pris  + '</td>' + 
-		'<td>' + cart[i].antal * cart[i].pris + 'kr</td>' + 
+		'<td>' + cart[i].antal * cart[i].pris + 'kr</td>' +
+              /*  '<td>' + "<button id='raderaKundvagn' onclick='shoppingvagn.deleteFromCart("+
+                cart[i].id+","+cart[i].namn+","+cart[i].pris+","+cart[i].bildurl+"),visaInnehall()'>Radera</button></td>"; */
+        
 		'</tr>';
+                
+              /*  $("#raderaKundvagn").click(function () {
+            shoppingvagn.deleteFromCart(new Vara(cart[i].id,cart[i].namn,cart[i].pris,cart[i].bildurl));
+        }); */
+          $("#raderaKundvagn").click(function () {
+            ("tryckte på radera");
+        });
+         
 	 
 	}//end for
 	data += '<tr><td colspan="5" align="right">Att Betala ' + shoppingvagn.getAmount() + 'kr</td></tr>';
 	data += '<tr><td colspan="5" align="right"><button onclick="shoppingvagn.emptyCart(), visaInnehall()">Töm kundvagnen</button></td></tr>';
 	data += '</table>';
+        
+        
 
 	mydiv.innerHTML=data;
                 }
+
+
