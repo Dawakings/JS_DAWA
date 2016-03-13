@@ -10,10 +10,12 @@
         <meta name="viewport" content="width=device-width,initial-scale=1.0">
 
         <link rel="stylesheet" type="text/css" href="style_ny.css">
+        
+        <script src="http://code.jquery.com/jquery-latest.min.js"></script>  <!--Jquery --> 
 
         <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script> <!-- för RWD -->
 
-        <script src="kundvagn2.js"> </script> <!-- JS funktioner för kundvagnen -->
+      <script src="kundvagn2.js"> </script> <!-- JS funktioner för kundvagnen -->
         <script src="presentation.js"> </script> <!-- JS för presentationen på sidan -->
 
     </head>
@@ -25,7 +27,9 @@
             <header class="rubrik">
                 <h1>Good Data</h1>
                 <h2 class="h2">Bra elektronik</h2>
+<div id="loggain">
 
+                </div>
 
             </header>
             <aside>
@@ -59,9 +63,7 @@
                 <ul id="lista">
 
                 </ul>
-                <div id="loggain">
-
-                </div>
+                
 
                 <div id="kundvagn">
 
@@ -119,7 +121,8 @@
 
                 <div class="betalsätt"><p><strong>Betalsätt</strong><br>Konto-/kreditkort, faktura</p></div>
 
-                <div class="infoupdate"><script>document.write("Sidan uppdaterad " + document.lastModified);</script> <!-- Skriver ut datum och tid för senaste redigeringen -->
+                <div class="infoupdate">
+                    <script>document.write("Sidan uppdaterad " + document.lastModified);</script> <!-- Skriver ut datum och tid för senaste redigeringen -->
                     <br><br>
                     <img src="hemsida_bilder/support-self-storage-software_0.png" alt="Bild på kvinna/support">
                 </div>
