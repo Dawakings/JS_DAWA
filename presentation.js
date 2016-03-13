@@ -22,6 +22,8 @@ function getAllavaror(data) {
 
         var img = document.createElement("img");
         img.src = data[temp].bildurl; //säter atributet src
+        img.width = "100";
+        img.height = "100";
 
 
 
@@ -29,7 +31,7 @@ function getAllavaror(data) {
         li.innerHTML += data[temp].namn + " ";
         li.innerHTML += data[temp].kategori + " ";
         li.innerHTML += data[temp].pris + " kr ";
-        //li.appendChild(img);
+        li.appendChild(img);
         li.innerHTML += data[temp].infoshort + " ";
 
 
